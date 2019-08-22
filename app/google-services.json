@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "188560881327",
+    "firebase_url": "https://minterin-1ff81.firebaseio.com",
+    "project_id": "minterin-1ff81",
+    "storage_bucket": "minterin-1ff81.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:188560881327:android:76d303596083757a",
+        "android_client_info": {
+          "package_name": "com.example.minterin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "188560881327-k3bshlkofse213ebrt466pcpn6auijf6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.minterin",
+            "certificate_hash": "eecc2e31fae84c74c5de45c04b5aab804a5679f5"
+          }
+        },
+        {
+          "client_id": "188560881327-ahl74aqvg2cv3ejubsanau8l1ahiht2s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr1iryjly1dG1aVK0anTK290T4ooFK_NM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "188560881327-ahl74aqvg2cv3ejubsanau8l1ahiht2s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
