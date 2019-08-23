@@ -12,6 +12,12 @@ public class Materi {
     @SerializedName("jml_video")
     String jml_video;
 
+    public Materi(String id, String nama_materi, String jml_video) {
+        this.id = id;
+        this.nama_materi = nama_materi;
+        this.jml_video = jml_video;
+    }
+
     public String getId() {
         return id;
     }

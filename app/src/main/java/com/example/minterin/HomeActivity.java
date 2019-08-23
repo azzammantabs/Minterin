@@ -6,8 +6,13 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 
+import com.example.minterin.adapter.MateriAdapter;
 import com.example.minterin.fragment.AkunFragment;
 import com.example.minterin.fragment.BerandaFragment;
 import com.example.minterin.fragment.KuisFragment;
@@ -15,6 +20,12 @@ import com.example.minterin.fragment.Tab1;
 import com.example.minterin.fragment.Tab2;
 import com.example.minterin.fragment.Tab3;
 import com.example.minterin.helperS.PrefsHelper;
+import com.example.minterin.modelS.Materi;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Retrofit;
 
 
 public class HomeActivity extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Tab3.OnFragmentInteractionListener {

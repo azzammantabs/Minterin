@@ -1,7 +1,12 @@
 package com.example.minterin.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.minterin.R;
+import com.example.minterin.fragment.AkunFragment;
+import com.example.minterin.fragment.KuisFragment;
+import com.example.minterin.fragment.MateriFragment;
 import com.example.minterin.modelS.Matkul;
 
 import java.util.List;
@@ -19,6 +27,8 @@ public class MatkulAdapter extends RecyclerView.Adapter<MatkulAdapter.MatkulView
 
     private Context ctx;
     private List<Matkul> listMatkul;
+    Fragment mFragment;
+    Bundle mBundle;
 
     public MatkulAdapter(Context ctx, List<Matkul> listMatkul) {
         this.ctx = ctx;
@@ -43,7 +53,14 @@ public class MatkulAdapter extends RecyclerView.Adapter<MatkulAdapter.MatkulView
         matkulViewHolder.cv_matkul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ctx, "Hai saya MATA KULIAH "+ matkulViewHolder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                if (matkulViewHolder.getAdapterPosition() == 0) {
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    Fragment myFragment = new MateriFragment();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
+                }
+                else{
+                    Toast.makeText(ctx, "Belum dapat mengakses item ini", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -64,4 +81,5 @@ public class MatkulAdapter extends RecyclerView.Adapter<MatkulAdapter.MatkulView
             cv_matkul = itemView.findViewById(R.id.cv_matkul);
         }
     }
+
 }

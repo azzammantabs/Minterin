@@ -10,4 +10,5 @@ import retrofit2.http.GET;
 public interface ApiOnly {
     @GET("akses.php")
     Call<List<Matkul>> getMatkul();
+
 }

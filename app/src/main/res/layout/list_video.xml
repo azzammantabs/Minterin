@@ -23,14 +23,14 @@
             android:layout_gravity="center">
 
             <TextView
-                android:id="@+id/bab_matkul"
+                android:id="@+id/bab_matkul_"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Himpunan"
                 android:textColor="@android:color/black"
                 android:textSize="12sp" />
             <TextView
-                android:id="@+id/durasivideo"
+                android:id="@+id/durasivideo_"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="9 menit"
@@ -39,7 +39,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/img_play"
+            android:id="@+id/img_play_"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_play"

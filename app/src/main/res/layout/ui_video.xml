@@ -51,17 +51,20 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
 
         <VideoView
             android:id="@+id/video_materi"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal"
+            />
 
     </FrameLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rc_submateri"
+        android:id="@+id/rc_submateri2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

@@ -13,11 +13,13 @@ import android.widget.Toast;
 
 import com.example.minterin.R;
 import com.example.minterin.adapter.MateriAdapter;
+import com.example.minterin.adapter.SubmateriAdapter;
 import com.example.minterin.helperS.ApiOnlyK;
+import com.example.minterin.helperS.ApiOnlyS;
 import com.example.minterin.helperS.Const;
 import com.example.minterin.modelS.Materi;
+import com.example.minterin.modelS.Submateri;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,16 +28,16 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MateriFragment extends Fragment {
+public class SubMateriFragment extends Fragment {
     RecyclerView rcView;
     Retrofit retrofit;
-    private MateriAdapter adapterM;
-    private List<Materi> listMateri;
+    private SubmateriAdapter adapterM;
+    private List<Submateri> listSubMateri;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.ui_materi, container, false);
-        rcView = v.findViewById(R.id.rc_materi);
+        View v = inflater.inflate(R.layout.ui_submateri, container, false);
+        rcView = v.findViewById(R.id.rc_submateri1);
         rcView.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcView.setHasFixedSize(true);
         return v;
@@ -49,21 +51,21 @@ public class MateriFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        ApiOnlyK apiOnly = retrofit.create(ApiOnlyK.class);
-        Call<List<Materi>> result = apiOnly.getMateri();
-        result.enqueue(new Callback<List<Materi>>() {
+        ApiOnlyS apiOnly = retrofit.create(ApiOnlyS.class);
+        Call<List<Submateri>> result = apiOnly.getSubmateri();
+        result.enqueue(new Callback<List<Submateri>>() {
             @Override
-            public void onResponse(Call<List<Materi>> call, Response<List<Materi>> response) {
-                listMateri = response.body();
-                adapterM = new MateriAdapter(getActivity(), listMateri);
+            public void onResponse(Call<List<Submateri>> call, Response<List<Submateri>> response) {
+                listSubMateri = response.body();
+                adapterM = new SubmateriAdapter(getActivity(), listSubMateri);
                 rcView.setAdapter(adapterM);
-
             }
 
             @Override
-            public void onFailure(Call<List<Materi>> call, Throwable t) {
-                Toast.makeText(getActivity(), "data tidak dapat diambil", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<Submateri>> call, Throwable t) {
+                Toast.makeText(getActivity(), "tidak dapat mengambil data", Toast.LENGTH_SHORT).show();
             }
+
         });
     }
 }

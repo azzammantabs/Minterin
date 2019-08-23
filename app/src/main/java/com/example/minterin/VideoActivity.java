@@ -16,15 +16,15 @@ public class VideoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_video);
 
-//        vv_videomateri = findViewById(R.id.video_materi);
-//        MediaController mediaC = new MediaController(this);
-//
-//        Uri lokasivideo = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.dkandang_flm_fix);
-//        vv_videomateri.setVideoURI(lokasivideo);
-//        vv_videomateri.setMediaController(mediaC);
-//        mediaC.setAnchorView(vv_videomateri);
-//        mediaC.setAnchorView(vv_videomateri);
-//        vv_videomateri.start();
+        vv_videomateri = findViewById(R.id.video_materi);
+        MediaController mediaC = new MediaController(this);
+
+        Uri lokasivideo = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.river);
+        vv_videomateri.setVideoURI(lokasivideo);
+        vv_videomateri.setMediaController(mediaC);
+        mediaC.setAnchorView(vv_videomateri);
+        mediaC.setAnchorView(vv_videomateri);
+        vv_videomateri.start();
 
 
     }
