@@ -1,5 +1,7 @@
 package com.example.minterin;
 
+import android.net.Uri;
+
 public class User {
     public String username;
     public String email;

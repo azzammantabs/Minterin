@@ -20,7 +20,6 @@ public class ReferalActivity extends AppCompatActivity {
 
         btn_skip = findViewById(R.id.btn_skip);
 
-
         btn_skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

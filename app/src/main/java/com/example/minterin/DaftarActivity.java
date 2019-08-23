@@ -133,7 +133,8 @@ public class DaftarActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 User user = new User(
                                         usernameValue,
-                                        emailValue);
+                                        emailValue,
+                                        pickedImgUri.toString());
 
                                 FirebaseDatabase.getInstance().getReference("Users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

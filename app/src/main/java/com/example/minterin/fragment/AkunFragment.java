@@ -101,10 +101,10 @@ public class AkunFragment extends Fragment implements View.OnClickListener {
                 Toast.makeText(getActivity(), "edit password berhasil", Toast.LENGTH_SHORT).show();
             }break;
             case R.id.tv_logout: {
+                FirebaseAuth.getInstance().signOut();
                 Intent i = new Intent(getActivity(), LoginActivity.class);
                 PrefsHelper.sharedInstance(getActivity()).setStatusLogin(false);
                 startActivity(i);
-                System.exit(0);
             }break;
             case R.id.btn_upgradeprofil :{
                 Intent i = new Intent(getActivity(), MembershipActivity.class);
