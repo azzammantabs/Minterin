@@ -1,6 +1,7 @@
 package com.example.minterin;
 
 import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,22 +21,27 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DaftarActivity extends AppCompatActivity {
+
+    private static final int PICK_IMAGE_REQUEST = 1;
+
+    private User user = new User();
 
     EditText username, email, password;
     Button btnSignUp;
@@ -44,7 +51,9 @@ public class DaftarActivity extends AppCompatActivity {
     Uri pickedImgUri;
     ProgressBar pb_daftar;
     ImageView ic_arrow;
+
     private DatabaseReference databaseReference;
+    private StorageTask mUploadTask;
 
     static int PReqCode = 1;
     static int REQUESTCODE = 1;
@@ -131,10 +140,9 @@ public class DaftarActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                User user = new User(
-                                        usernameValue,
-                                        emailValue,
-                                        pickedImgUri.toString());
+
+                                user.setUsername(usernameValue);
+                                user.setEmail(emailValue);
 
                                 FirebaseDatabase.getInstance().getReference("Users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -179,32 +187,69 @@ public class DaftarActivity extends AppCompatActivity {
 
     }
 
-    private void updateUserInfo(final String usernameValue, Uri pickedImgUri, final FirebaseUser currentUser) {
-        StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("user_photos");
-        final StorageReference imageFilePath = mStorage.child(pickedImgUri.getLastPathSegment());
-        imageFilePath.putFile(pickedImgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                //Upload image success
-                //now we can get out image uri
-                imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(usernameValue)
-                                .setPhotoUri(uri)
-                                .build();
-                        currentUser.updateProfile(profileUpdate)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
+    private void updateUserInfo(final String usernameValue, final Uri pickedImgUri, final FirebaseUser currentUser) {
+        StorageReference mStorageRef = FirebaseStorage.getInstance().getReference().child("user_photos");
+        final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+                + "." + getFileExtension(pickedImgUri));
+        mUploadTask = fileReference.putFile(pickedImgUri);
 
-                                    }
-                                });
-                    }
-                });
+        Task<Uri> uriTask = mUploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+                // Continue with the task to get the download URL
+                return fileReference.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()){
+                    Uri downloadUri = task.getResult();
+                    user.setImage(downloadUri.toString());
+                    FirebaseDatabase.getInstance().getReference("Users")
+                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .setValue(user);
+                }
             }
         });
+
+        //
+//        mUploadTask = fileReference.putFile(pickedImgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                user.setImage(taskSnapshot.toString());
+//                FirebaseDatabase.getInstance().getReference("Users")
+//                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                        .setValue(user);
+//            }
+//        });
+
+//        imageFilePath.putFile(pickedImgUri)
+//                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                //Upload image success
+//                //now we can get out image uri
+//                imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                    @Override
+//                    public void onSuccess(Uri uri) {
+//                        UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
+//                                .setDisplayName(usernameValue)
+//                                .setPhotoUri(uri)
+//                                .build();
+//                        currentUser.updateProfile(profileUpdate)
+//                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                    @Override
+//                                    public void onComplete(@NonNull Task<Void> task) {
+//                                    }
+//                                });
+//                    }
+//                });
+//            }
+//        });
     }
     //fungsi dipanggil ketika autentikasi berhasil
     private void AuthSuccess(FirebaseUser user) {
@@ -216,6 +261,12 @@ public class DaftarActivity extends AppCompatActivity {
         User user = new User(nama,email);
 
         databaseReference.child("users").child(userId).setValue(user);
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
     @Override
