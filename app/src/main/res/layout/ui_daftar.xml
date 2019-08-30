@@ -42,7 +42,7 @@
             android:id="@+id/civ_ProfPict"
             android:layout_width="108dp"
             android:layout_height="108dp"
-            android:src="@drawable/ic_user"
+            android:src="@drawable/ic_akuns"
             app:civ_border_color="@color/colorPrimaryDark" />
 
         <ImageView

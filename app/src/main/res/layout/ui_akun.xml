@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:text="Audi Isra"
+            android:text="username"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
@@ -229,10 +229,11 @@
             android:id="@+id/tv_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="12dp"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="24dp"
             android:text="KELUAR"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@android:color/holo_red_dark"
             android:textSize="20sp"
             android:textStyle="bold" />
 
