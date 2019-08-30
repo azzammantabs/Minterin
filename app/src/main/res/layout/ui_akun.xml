@@ -41,7 +41,7 @@
                 android:layout_height="80dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
-                android:src="@drawable/ic_user"
+                android:src="@drawable/ic_akuns"
                 app:civ_border_color="#FF000000" />
 
         </RelativeLayout>
