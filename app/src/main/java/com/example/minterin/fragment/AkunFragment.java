@@ -92,13 +92,13 @@ public class AkunFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_editprofil: {
-                Toast.makeText(getActivity(), "edit profil berhasil", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Maaf, belum bisa mengedit profil", Toast.LENGTH_SHORT).show();
             }break;
             case R.id.tv_editemail: {
-                Toast.makeText(getActivity(), "edit email berhasil", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Maaf, belum bisa mengedit email", Toast.LENGTH_SHORT).show();
             }break;
             case R.id.tv_editpassword: {
-                Toast.makeText(getActivity(), "edit password berhasil", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Maaf, belum bisa mengedit password", Toast.LENGTH_SHORT).show();
             }break;
             case R.id.tv_logout: {
                 FirebaseAuth.getInstance().signOut();

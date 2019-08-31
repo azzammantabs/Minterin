@@ -156,6 +156,9 @@ public class DaftarActivity extends AppCompatActivity {
                                             Toast.makeText(DaftarActivity.this, "Registrasi Berhasil", Toast.LENGTH_SHORT).show();
                                             pb_daftar.setVisibility(View.GONE);
                                             btnSignUp.setVisibility(View.VISIBLE);
+                                            Intent intent = new Intent(DaftarActivity.this, LoginActivity.class);
+                                            startActivity(intent);
+                                            finish();
                                         } else {
                                             Toast.makeText(DaftarActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                         }

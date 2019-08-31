@@ -16,13 +16,6 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-        <ImageButton
-            android:id="@+id/ic_arrowback_r"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_arrow_back_black_24dp" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,7 +51,7 @@
         android:layout_marginTop="30dp"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"/>
-    
+
     <Button
         android:layout_width="160dp"
         android:layout_height="40dp"

@@ -68,7 +68,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Himpunan"
+                            android:text="Bilangan Riil dan Pertidaksamaan"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -81,7 +81,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="12"
+                                android:text="6"
                                 android:textColor="@color/colorPrimarySoftDark"
                                 android:textSize="10sp" />
 
@@ -108,7 +108,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="1 dari 12 Video"
+                                android:text="1 dari 6 Video"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="10sp" />
 
