@@ -130,7 +130,9 @@ public class DaftarActivity extends AppCompatActivity {
                 } else if (passwordValue.isEmpty()) {
                     password.setError("Password Tidak Boleh Kosong");
                     password.requestFocus();
-                } else if (usernameValue.isEmpty() && emailValue.isEmpty() && passwordValue.isEmpty()) {
+                } else if(pickedImgUri == null){
+                    Toast.makeText(DaftarActivity.this, "Silahkan upload gambar", Toast.LENGTH_SHORT).show();
+                }else if (usernameValue.isEmpty() && emailValue.isEmpty() && passwordValue.isEmpty()) {
                     Toast.makeText(DaftarActivity.this, "Isi Seluruh Data", Toast.LENGTH_SHORT)
                             .show();
                 } else if (!(usernameValue.isEmpty()) && !(emailValue.isEmpty()) && !(passwordValue.isEmpty())) {
@@ -206,7 +208,7 @@ public class DaftarActivity extends AppCompatActivity {
         }).addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
                     user.setImage(downloadUri.toString());
                     FirebaseDatabase.getInstance().getReference("Users")
@@ -251,14 +253,16 @@ public class DaftarActivity extends AppCompatActivity {
 //            }
 //        });
     }
+
     //fungsi dipanggil ketika autentikasi berhasil
     private void AuthSuccess(FirebaseUser user) {
         writenewUser(user.getUid(), username.getText().toString(), email.getText().toString());
 
     }
+
     //menulis ke database
     private void writenewUser(String userId, String nama, String email) {
-        User user = new User(nama,email);
+        User user = new User(nama, email);
 
         databaseReference.child("users").child(userId).setValue(user);
     }
